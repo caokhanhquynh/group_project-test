@@ -78,36 +78,36 @@ public class UsersController {
         }
         else{
             model.addAttribute("user", user);
-            if ("admin".equals(user.getUsertype().toLowerCase())) {
-                return "users/adminPage"; // Redirect to admin dashboard
-            } else {
+            // if ("admin".equals(user.getUsertype().toLowerCase())) {
+            //     return "users/adminPage"; // Redirect to admin dashboard
+            // } else {
                 return "users/userPage"; // Redirect to user dashboard
-            }
+            // }
         }
     }
 
     @PostMapping("/login")
     public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes){
         // processing logins
-        if (formData.get("username") == null || formData.get("username").isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "Please enter your username.");
-            redirectAttributes.addFlashAttribute("user", formData);
-            return "redirect:/login";
-        }
-        if (formData.get("password") == null || formData.get("password").isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "Please enter your password.");
-            redirectAttributes.addFlashAttribute("user", formData);
-            return "redirect:/login";
-        }
+        // if (formData.get("username") == null || formData.get("username").isEmpty()) {
+        //     redirectAttributes.addFlashAttribute("error", "Please enter your username.");
+        //     redirectAttributes.addFlashAttribute("user", formData);
+        //     return "redirect:/login";
+        // }
+        // if (formData.get("password") == null || formData.get("password").isEmpty()) {
+        //     redirectAttributes.addFlashAttribute("error", "Please enter your password.");
+        //     redirectAttributes.addFlashAttribute("user", formData);
+        //     return "redirect:/login";
+        // }
         String username = formData.get("username");
         String pwd = formData.get("password");
         List<User> userList = userRepo.findByUsernameAndPassword(username, pwd);
-        if (userList.isEmpty()){
-            redirectAttributes.addFlashAttribute("error", "Incorrect username or password.");
-            redirectAttributes.addFlashAttribute("user", formData);
-            return "redirect:/login";
-        }
-        else{
+        // if (userList.isEmpty()){
+        //     redirectAttributes.addFlashAttribute("error", "Incorrect username or password.");
+        //     redirectAttributes.addFlashAttribute("user", formData);
+        //     return "redirect:/login";
+        // }
+        // else{
             //sucess
             User user = userList.get(0);
             request.getSession().setAttribute("session_user", user);
@@ -116,7 +116,7 @@ public class UsersController {
                 return "users/adminPage"; // Redirect to admin dashboard
             } else {
                 return "users/userPage"; // Redirect to user dashboard
-        }
+        // }
     }
     }
 
